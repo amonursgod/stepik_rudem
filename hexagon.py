@@ -1,4 +1,4 @@
-
+#add input.txt file with k, output is saved to output.txt
 routes = ["","","","AHG","ABIG","ABCJG"]
 
 with open("input.txt",'r') as input_file:
