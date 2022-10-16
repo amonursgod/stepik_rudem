@@ -1,28 +1,3 @@
-# previous F,G Current A, next B,H
-# previous B,H Current A, next F,G
-# previous A,H Current B, next C,I
-# previous C,I Current B, next A,H
-# previous B,I Current C, next J,D
-# previous J,D Current C, next B,I
-# CJ D EK
-# EK D CJ
-# DK E FL
-# FL E DK
-# EL F AG
-# AG F EL
-# AF G HIJKL
-# HIJKL G AF
-# previous A,B Current H, next G,I,J,K,L
-# previous G,I,J,K,L Current H, next A,B
-# BC I GHJKL
-# GHJKL I BC
-# CD J GHIKL
-# GHIKL J CD
-# ED K GHIJL
-# GHIJL K ED
-# EF L GHIJK
-# GHIJK L EF
-
 graph_connections = {}
 for letter in list(map(chr, range(ord("A"), ord("L") + 1))):
     graph_connections[letter] = {}
@@ -119,7 +94,7 @@ with open("test.txt", "r") as input_file:
 result = ""
 
 for route in routes:
-    valid = 1
+    valid = "1"
     # check if entrance and exit are in principle, correct
     if (route[0] in ["A", "F", "G"]) and (route[-1] in ["A", "F", "G"]):
         # clear the values of previous, current, next from the last route
@@ -140,7 +115,7 @@ for route in routes:
                 elif previous in graph_connections[current]["prev"]["inverse"]:
                     direction = "inverse"
                 else:
-                    valid = 0
+                    valid = "0"
                     break
             # determine if the third and further letters are legitimate
             # that is, check if it matches the dictionary and is not equal to "previous"
@@ -154,7 +129,7 @@ for route in routes:
                 elif previous in graph_connections[current]["prev"]["inverse"]:
                     direction = "inverse"
                 else:
-                    valid = 0
+                    valid = "0"
                     break
                 # new code for next to be valid
                 if (next in graph_connections[current]["next"][direction]) and (
@@ -164,13 +139,12 @@ for route in routes:
                     current = next
                     next = ""
                 else:
-                    valid = 0
+                    valid = "0"
                     break
 
     else:
-        valid = 0
-    result = result + str(valid)
-print(result)
+        valid = "0"
+    result = result + valid
 
 with open("output.txt", "w+") as output_file:
     output_file.writelines(result)
