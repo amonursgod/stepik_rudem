@@ -61,34 +61,34 @@ graph_connections["F"]["prev"]["inverse"] = ["A", "G"]
 graph_connections["F"]["next"]["inverse"] = ["E", "L"]
 
 graph_connections["G"]["prev"]["direct"] = ["A", "F"]
-graph_connections["G"]["next"]["direct"] = ["H","I","J","K","L"]
-graph_connections["G"]["prev"]["inverse"] = ["H","I","J","K","L"]
-graph_connections["G"]["next"]["inverse"] = ["A","F"]
+graph_connections["G"]["next"]["direct"] = ["H", "I", "J", "K", "L"]
+graph_connections["G"]["prev"]["inverse"] = ["H", "I", "J", "K", "L"]
+graph_connections["G"]["next"]["inverse"] = ["A", "F"]
 
 graph_connections["H"]["prev"]["direct"] = ["A", "B"]
-graph_connections["H"]["next"]["direct"] = ["G","I","J","K","L"]
-graph_connections["H"]["prev"]["inverse"] = ["G","I","J","K","L"]
+graph_connections["H"]["next"]["direct"] = ["G", "I", "J", "K", "L"]
+graph_connections["H"]["prev"]["inverse"] = ["G", "I", "J", "K", "L"]
 graph_connections["H"]["next"]["inverse"] = ["A", "B"]
 
 graph_connections["I"]["prev"]["direct"] = ["B", "C"]
-graph_connections["I"]["next"]["direct"] = ["G","H","J","K","L"]
-graph_connections["I"]["prev"]["inverse"] = ["G","H","J","K","L"]
+graph_connections["I"]["next"]["direct"] = ["G", "H", "J", "K", "L"]
+graph_connections["I"]["prev"]["inverse"] = ["G", "H", "J", "K", "L"]
 graph_connections["I"]["next"]["inverse"] = ["B", "C"]
 
 graph_connections["J"]["prev"]["direct"] = ["C", "D"]
-graph_connections["J"]["next"]["direct"] = ["G","H","I","K","L"]
-graph_connections["J"]["prev"]["inverse"] = ["G","H","I","K","L"]
+graph_connections["J"]["next"]["direct"] = ["G", "H", "I", "K", "L"]
+graph_connections["J"]["prev"]["inverse"] = ["G", "H", "I", "K", "L"]
 graph_connections["J"]["next"]["inverse"] = ["C", "D"]
 
 graph_connections["K"]["prev"]["direct"] = ["E", "D"]
-graph_connections["K"]["next"]["direct"] = ["G","H","I","J","L"]
-graph_connections["K"]["prev"]["inverse"] = ["G","H","I","J","L"]
-graph_connections["K"]["next"]["inverse"] = ["E","D"]
+graph_connections["K"]["next"]["direct"] = ["G", "H", "I", "J", "L"]
+graph_connections["K"]["prev"]["inverse"] = ["G", "H", "I", "J", "L"]
+graph_connections["K"]["next"]["inverse"] = ["E", "D"]
 
-graph_connections["L"]["prev"]["direct"] = ["E","F"]
-graph_connections["L"]["next"]["direct"] = ["G","H","I","J","K"]
-graph_connections["L"]["prev"]["inverse"] = ["G","H","I","J","K"]
-graph_connections["L"]["next"]["inverse"] = ["E","F"]
+graph_connections["L"]["prev"]["direct"] = ["E", "F"]
+graph_connections["L"]["next"]["direct"] = ["G", "H", "I", "J", "K"]
+graph_connections["L"]["prev"]["inverse"] = ["G", "H", "I", "J", "K"]
+graph_connections["L"]["next"]["inverse"] = ["E", "F"]
 
 # algorithm for checking a single string
 #'prev','current','direction','next' are variables of string type
@@ -118,8 +118,6 @@ with open("test.txt", "r") as input_file:
     routes = input_file.read().splitlines()
 result = ""
 
-print(routes)
-
 for route in routes:
     valid = 1
     # check if entrance and exit are in principle, correct
@@ -137,8 +135,6 @@ for route in routes:
             # determine the direction of route in a graph if the second letter is legitimate
             elif (current == "") and (direction == ""):
                 current = letter
-                print(graph_connections[current]["prev"]["direct"])
-                print(graph_connections[current]["prev"]["inverse"])              
                 if previous in graph_connections[current]["prev"]["direct"]:
                     direction = "direct"
                 elif previous in graph_connections[current]["prev"]["inverse"]:
@@ -146,13 +142,13 @@ for route in routes:
                 else:
                     valid = 0
                     break
-            #determine if the third and further letters are legitimate
-            #that is, check if it matches the dictionary and is not equal to "previous"
-            
+            # determine if the third and further letters are legitimate
+            # that is, check if it matches the dictionary and is not equal to "previous"
+
             else:
-                #we try to check if this new letter is valid, so we write it to "next"
+                # we try to check if this new letter is valid, so we write it to "next"
                 next = letter
-                #same code for previous to be valid
+                # same code for previous to be valid
                 if previous in graph_connections[current]["prev"]["direct"]:
                     direction = "direct"
                 elif previous in graph_connections[current]["prev"]["inverse"]:
@@ -160,16 +156,16 @@ for route in routes:
                 else:
                     valid = 0
                     break
-                #new code for next to be valid
-                if (next in graph_connections[current]["next"][direction]) and (next != previous):
+                # new code for next to be valid
+                if (next in graph_connections[current]["next"][direction]) and (
+                    next != previous
+                ):
                     previous = current
                     current = next
                     next = ""
                 else:
                     valid = 0
                     break
-
-                
 
     else:
         valid = 0
