@@ -1,10 +1,11 @@
 graph_connections = {}
+
 for letter in list(map(chr, range(ord("A"), ord("L") + 1))):
     graph_connections[letter] = {}
 for letter in list(map(chr, range(ord("A"), ord("L") + 1))):
     graph_connections[letter]["prev"] = {}
     graph_connections[letter]["next"] = {}
-# print(graph_connections)
+
 graph_connections["A"]["prev"]["direct"] = ["F", "G"]
 graph_connections["A"]["next"]["direct"] = ["B", "H"]
 graph_connections["A"]["prev"]["inverse"] = ["B", "H"]
